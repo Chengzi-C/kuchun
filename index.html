@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>库存管理系统</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>库存管理系统</h1>
+        
+        <div class="form-container">
+            <h2>添加/修改商品</h2>
+            <form id="inventoryForm">
+                <input type="hidden" id="editIndex" value="-1">
+                <div class="form-group">
+                    <label for="productName">商品名称：</label>
+                    <input type="text" id="productName" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">数量：</label>
+                    <input type="number" id="quantity" required min="0">
+                </div>
+                <div class="form-group">
+                    <label for="status">商品状态：</label>
+                    <select id="status" required>
+                        <option value="unsold">未售</option>
+                        <option value="sold">已售</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="purchaseDate">拿货日期：</label>
+                    <input type="date" id="purchaseDate">
+                    <span class="price-hint">(选填)</span>
+                </div>
+                <div class="form-group">
+                    <label for="costPrice">拿货价格：</label>
+                    <input type="number" id="costPrice" required min="0" step="0.01">
+                </div>
+                <div class="form-group selling-price-group">
+                    <label for="price">销售价格：</label>
+                    <input type="number" id="price" min="0" step="0.01">
+                    <span class="price-hint">(未售商品可不填)</span>
+                </div>
+                <button type="submit" id="submitBtn">添加商品</button>
+            </form>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="搜索商品...">
+        </div>
+
+        <div class="filter-container">
+            <div class="date-filter">
+                <label for="monthFilter">选择月份：</label>
+                <input type="month" id="monthFilter">
+            </div>
+            <button class="filter-btn" onclick="clearFilter()">显示全部</button>
+        </div>
+
+        <div class="table-container">
+            <div class="batch-actions">
+                <button class="action-btn delete-btn" onclick="deleteSelected()">批量删除</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" id="selectAll" onclick="toggleSelectAll()">
+                        </th>
+                        <th>商品名称</th>
+                        <th>数量</th>
+                        <th>拿货价</th>
+                        <th>状态</th>
+                        <th>销售价</th>
+                        <th>利润率</th>
+                        <th>总利润</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryList">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
